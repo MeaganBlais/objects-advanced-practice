@@ -22,28 +22,46 @@ var companySalesData = [
   }
 ];
 
+// console.log('test = ' + companySalesData['sales'])
+
 function calculateSalesTax(salesData, taxRates) {
   // Implement your code here
-  let output = {}
-  var totalSales = 0;
-  for (var i = 0; i < companySalesData.length; i++) {  // iterates through each company (3 loops)
-      for (var j = 0; j < companySalesData[j].sales.length; j++) { // iterates through each company x# based on #sales - 3/6/2
-        totalSales += companySalesData.sales
-      }
+  let output = {totSales()}
+  
 
 
-   
-      console.log('totalSales = ' + totalSales)
 
-
-    //   console.log('sales.length is ' + companySalesData[i].sales.length) -- used to verify 2nd loop is setup correctly
-  }
 }
 
 
 
+function totSales() {
+  let output = {}
+  for (var i = 0; i < companySalesData.length; i++) {  
+      // iterates through each company (3 loops)
+      var totalSales = 0;
+      var currentSalesData = companySalesData[i];
+      
+      for (var j = 0; j < currentSalesData.sales.length; j++) { // iterates through each company based on #sales - 3/6/2 - verified using console.log(sales.length)
+        
+        totalSales += currentSalesData.sales[j];
+      }
+                //   console.log('totalSales = ' + totalSales)
+                // pack object ....
+                // totalSales = {name: currentSalesData.name};
+                output[companySalesData[i].name] = {  //only returns the last Telus regardless if it's [current] or [company]
+                    sales: totalSales
+                }
+  }
+      return output; //this causes the function to only return one totalSales item
+}
+   const foo = totSales()
+   console.log(JSON.stringify(foo))
+
 
 var results = calculateSalesTax(companySalesData, salesTaxRates);
+
+
 
 /* Expected Results:
 {
@@ -58,6 +76,5 @@ var results = calculateSalesTax(companySalesData, salesTaxRates);
 }
 
 console.log('companySalesData.length ' + companySalesData.length)  = 3
-
 
 */
