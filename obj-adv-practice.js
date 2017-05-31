@@ -24,7 +24,24 @@ var companySalesData = [
 
 function calculateSalesTax(salesData, taxRates) {
   // Implement your code here
+  let output = {}
+  var totalSales = 0;
+  for (var i = 0; i < companySalesData.length; i++) {  // iterates through each company (3 loops)
+      for (var j = 0; j < companySalesData[j].sales.length; j++) { // iterates through each company x# based on #sales - 3/6/2
+        totalSales += companySalesData.sales
+      }
+
+
+   
+      console.log('totalSales = ' + totalSales)
+
+
+    //   console.log('sales.length is ' + companySalesData[i].sales.length) -- used to verify 2nd loop is setup correctly
+  }
 }
+
+
+
 
 var results = calculateSalesTax(companySalesData, salesTaxRates);
 
@@ -39,4 +56,8 @@ var results = calculateSalesTax(companySalesData, salesTaxRates);
     totalTaxes: 40
   }
 }
+
+console.log('companySalesData.length ' + companySalesData.length)  = 3
+
+
 */
