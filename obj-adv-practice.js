@@ -22,59 +22,39 @@ var companySalesData = [
   }
 ];
 
-// console.log('test = ' + companySalesData['sales'])
-
-function calculateSalesTax(salesData, taxRates) {
-  // Implement your code here
-  let output = {totSales()}
-  
-
-
-
+function totalTax(amount, prov) {
+  return amount * salesTaxRates[prov];
 }
 
-
-
-function totSales() {
+function calculateSalesTax() {
   let output = {}
-  for (var i = 0; i < companySalesData.length; i++) {  
+  for (var i = 0; i < companySalesData.length; i++) {
+
       // iterates through each company (3 loops)
-      var totalSales = 0;
+      var finalSales = 0;
       var currentSalesData = companySalesData[i];
-      
-      for (var j = 0; j < currentSalesData.sales.length; j++) { // iterates through each company based on #sales - 3/6/2 - verified using console.log(sales.length)
-        
-        totalSales += currentSalesData.sales[j];
+
+    // iterates through each company based on #sales - 3/6/2 - verified using console.log(sales.length)
+      for (var j = 0; j < currentSalesData.sales.length; j++) {
+        finalSales += currentSalesData.sales[j];
       }
-                //   console.log('totalSales = ' + totalSales)
-                // pack object ....
-                // totalSales = {name: currentSalesData.name};
-                output[companySalesData[i].name] = {  //only returns the last Telus regardless if it's [current] or [company]
-                    sales: totalSales
-                }
+
+	  if (output[currentSalesData.name]) {  // tests & matches
+  
+		// instead of creating a new object, add to value of existing object
+		output[currentSalesData.name].sales += finalSales
+	  } else {
+           output[currentSalesData.name] = {
+                sales: finalSales,
+
+                //TODO include both tax outputs for Telus
+                tax: totalTax(finalSales, currentSalesData.province)
+        }
+      }
   }
-      return output; //this causes the function to only return one totalSales item
-}
-   const foo = totSales()
-   console.log(JSON.stringify(foo))
-
-
-var results = calculateSalesTax(companySalesData, salesTaxRates);
-
-
-
-/* Expected Results:
-{
-  Telus: {
-    totalSales: 1300
-    totalTaxes: 144
-  },
-  Bombardier: {
-    totalSales: 800,
-    totalTaxes: 40
+   return output; //this causes the function to only return one totalSales item
   }
-}
+      
+//    console.log(JSON.stringify(foo)) //this will output the values of object
 
-console.log('companySalesData.length ' + companySalesData.length)  = 3
-
-*/
+console.log(calculateSalesTax(companySalesData, salesTaxRates));
